@@ -9,9 +9,5 @@
 import Foundation
 
 struct PhotosResponse: Codable {
-    let page: Int
-    let pages: String
-    let perpage: String
-    let total: String
     let photo: [Photo]?
 }

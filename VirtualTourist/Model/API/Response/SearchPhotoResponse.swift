@@ -10,5 +10,4 @@ import Foundation
 
 struct SearchPhotoResponse: Codable {
     let photos: PhotosResponse
-    let stat: String
 }

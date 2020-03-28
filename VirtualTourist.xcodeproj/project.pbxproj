@@ -19,6 +19,7 @@
 		56B3A335242F903700239B73 /* PhotosResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A334242F903700239B73 /* PhotosResponse.swift */; };
 		56B3A337242F908400239B73 /* SearchPhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A336242F908400239B73 /* SearchPhotoResponse.swift */; };
 		56B3A339242F954C00239B73 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A338242F954C00239B73 /* Photo.swift */; };
+		56B3A33B242FA21D00239B73 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A33A242FA21D00239B73 /* ErrorResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		56B3A334242F903700239B73 /* PhotosResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosResponse.swift; sourceTree = "<group>"; };
 		56B3A336242F908400239B73 /* SearchPhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoResponse.swift; sourceTree = "<group>"; };
 		56B3A338242F954C00239B73 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		56B3A33A242FA21D00239B73 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				56B3A336242F908400239B73 /* SearchPhotoResponse.swift */,
 				56B3A334242F903700239B73 /* PhotosResponse.swift */,
 				56B3A338242F954C00239B73 /* Photo.swift */,
+				56B3A33A242FA21D00239B73 /* ErrorResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				56B3A311242F7C5500239B73 /* AppDelegate.swift in Sources */,
 				56B3A339242F954C00239B73 /* Photo.swift in Sources */,
 				56B3A337242F908400239B73 /* SearchPhotoResponse.swift in Sources */,
+				56B3A33B242FA21D00239B73 /* ErrorResponse.swift in Sources */,
 				56B3A32F242F843900239B73 /* PhotoAlbumViewController.swift in Sources */,
 				56B3A313242F7C5500239B73 /* SceneDelegate.swift in Sources */,
 				56B3A335242F903700239B73 /* PhotosResponse.swift in Sources */,
