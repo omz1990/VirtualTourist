@@ -34,6 +34,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="d5W-Qo-lpe">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <connections>
+                                    <outlet property="delegate" destination="qKe-yr-zLv" id="z9C-cB-l9c"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -47,6 +50,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="WIf-VI-PEv"/>
                     <connections>
+                        <outlet property="mapView" destination="d5W-Qo-lpe" id="Rht-E8-UaI"/>
                         <segue destination="9ej-7x-JLh" kind="show" identifier="showAlbumSegue" id="eyi-Xd-U7M"/>
                     </connections>
                 </viewController>
