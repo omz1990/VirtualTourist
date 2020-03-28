@@ -15,6 +15,10 @@
 		56B3A31D242F7C5B00239B73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56B3A31C242F7C5B00239B73 /* Assets.xcassets */; };
 		56B3A320242F7C5B00239B73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56B3A31E242F7C5B00239B73 /* LaunchScreen.storyboard */; };
 		56B3A32F242F843900239B73 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A32E242F843900239B73 /* PhotoAlbumViewController.swift */; };
+		56B3A331242F8FE100239B73 /* FlickrClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A330242F8FE100239B73 /* FlickrClient.swift */; };
+		56B3A335242F903700239B73 /* PhotosResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A334242F903700239B73 /* PhotosResponse.swift */; };
+		56B3A337242F908400239B73 /* SearchPhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A336242F908400239B73 /* SearchPhotoResponse.swift */; };
+		56B3A339242F954C00239B73 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A338242F954C00239B73 /* Photo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		56B3A31F242F7C5B00239B73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		56B3A321242F7C5B00239B73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56B3A32E242F843900239B73 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
+		56B3A330242F8FE100239B73 /* FlickrClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrClient.swift; sourceTree = "<group>"; };
+		56B3A334242F903700239B73 /* PhotosResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosResponse.swift; sourceTree = "<group>"; };
+		56B3A336242F908400239B73 /* SearchPhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoResponse.swift; sourceTree = "<group>"; };
+		56B3A338242F954C00239B73 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +118,8 @@
 		56B3A32B242F809C00239B73 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				56B3A333242F8FFD00239B73 /* Client */,
+				56B3A332242F8FED00239B73 /* Response */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -127,6 +137,24 @@
 			children = (
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		56B3A332242F8FED00239B73 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				56B3A336242F908400239B73 /* SearchPhotoResponse.swift */,
+				56B3A334242F903700239B73 /* PhotosResponse.swift */,
+				56B3A338242F954C00239B73 /* Photo.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		56B3A333242F8FFD00239B73 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				56B3A330242F8FE100239B73 /* FlickrClient.swift */,
+			);
+			path = Client;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,8 +231,12 @@
 				56B3A31B242F7C5500239B73 /* VirtualTourist.xcdatamodeld in Sources */,
 				56B3A315242F7C5500239B73 /* TravelLocationsMapViewController.swift in Sources */,
 				56B3A311242F7C5500239B73 /* AppDelegate.swift in Sources */,
+				56B3A339242F954C00239B73 /* Photo.swift in Sources */,
+				56B3A337242F908400239B73 /* SearchPhotoResponse.swift in Sources */,
 				56B3A32F242F843900239B73 /* PhotoAlbumViewController.swift in Sources */,
 				56B3A313242F7C5500239B73 /* SceneDelegate.swift in Sources */,
+				56B3A335242F903700239B73 /* PhotosResponse.swift in Sources */,
+				56B3A331242F8FE100239B73 /* FlickrClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
