@@ -24,7 +24,7 @@
             </objects>
             <point key="canvasLocation" x="-20" y="141"/>
         </scene>
-        <!--Travel Locations Map View Controller-->
+        <!--Virtual Tourist-->
         <scene sceneID="s9h-O8-dnh">
             <objects>
                 <viewController id="qKe-yr-zLv" customClass="TravelLocationsMapViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
@@ -38,18 +38,28 @@
                                     <outlet property="delegate" destination="qKe-yr-zLv" id="z9C-cB-l9c"/>
                                 </connections>
                             </mapView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="3nH-au-cmX">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="3nH-au-cmX" firstAttribute="top" secondItem="86i-SY-wvH" secondAttribute="top" id="0vV-aD-57p"/>
+                            <constraint firstItem="3nH-au-cmX" firstAttribute="centerY" secondItem="86i-SY-wvH" secondAttribute="centerY" id="4KG-bi-fYO"/>
+                            <constraint firstItem="86i-SY-wvH" firstAttribute="trailing" secondItem="3nH-au-cmX" secondAttribute="trailing" id="FYc-k9-JlY"/>
+                            <constraint firstItem="3nH-au-cmX" firstAttribute="centerX" secondItem="86i-SY-wvH" secondAttribute="centerX" id="L6P-sY-918"/>
+                            <constraint firstItem="86i-SY-wvH" firstAttribute="bottom" secondItem="3nH-au-cmX" secondAttribute="bottom" id="N9B-Vs-K2P"/>
                             <constraint firstItem="86i-SY-wvH" firstAttribute="trailing" secondItem="d5W-Qo-lpe" secondAttribute="trailing" id="Shx-w8-WZS"/>
                             <constraint firstItem="86i-SY-wvH" firstAttribute="bottom" secondItem="d5W-Qo-lpe" secondAttribute="bottom" id="bzd-T8-ZRX"/>
                             <constraint firstItem="d5W-Qo-lpe" firstAttribute="top" secondItem="86i-SY-wvH" secondAttribute="top" id="kIS-kh-8xm"/>
+                            <constraint firstItem="3nH-au-cmX" firstAttribute="leading" secondItem="86i-SY-wvH" secondAttribute="leading" id="omP-kd-EiO"/>
                             <constraint firstItem="d5W-Qo-lpe" firstAttribute="leading" secondItem="86i-SY-wvH" secondAttribute="leading" id="udE-i2-dyh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="86i-SY-wvH"/>
                     </view>
-                    <navigationItem key="navigationItem" id="WIf-VI-PEv"/>
+                    <navigationItem key="navigationItem" title="Virtual Tourist" id="WIf-VI-PEv"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="3nH-au-cmX" id="Ljz-wl-hAB"/>
                         <outlet property="mapView" destination="d5W-Qo-lpe" id="Rht-E8-UaI"/>
                         <segue destination="9ej-7x-JLh" kind="show" identifier="showAlbumSegue" id="eyi-Xd-U7M"/>
                     </connections>

@@ -20,6 +20,8 @@
 		56B3A337242F908400239B73 /* SearchPhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A336242F908400239B73 /* SearchPhotoResponse.swift */; };
 		56B3A339242F954C00239B73 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A338242F954C00239B73 /* Photo.swift */; };
 		56B3A33B242FA21D00239B73 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A33A242FA21D00239B73 /* ErrorResponse.swift */; };
+		56B3A33D2430C23300239B73 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A33C2430C23300239B73 /* Constants.swift */; };
+		56B3A33F2430DE0300239B73 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A33E2430DE0300239B73 /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		56B3A336242F908400239B73 /* SearchPhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoResponse.swift; sourceTree = "<group>"; };
 		56B3A338242F954C00239B73 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		56B3A33A242FA21D00239B73 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		56B3A33C2430C23300239B73 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		56B3A33E2430DE0300239B73 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 		56B3A327242F7FB100239B73 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				56B3A33C2430C23300239B73 /* Constants.swift */,
 				56B3A316242F7C5500239B73 /* Main.storyboard */,
 				56B3A31C242F7C5B00239B73 /* Assets.xcassets */,
 				56B3A31E242F7C5B00239B73 /* LaunchScreen.storyboard */,
@@ -96,6 +101,7 @@
 			children = (
 				56B3A314242F7C5500239B73 /* TravelLocationsMapViewController.swift */,
 				56B3A32E242F843900239B73 /* PhotoAlbumViewController.swift */,
+				56B3A33E2430DE0300239B73 /* UIViewController+Extension.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -137,6 +143,7 @@
 		56B3A32D242F80B000239B73 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				56B3A338242F954C00239B73 /* Photo.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -146,7 +153,6 @@
 			children = (
 				56B3A336242F908400239B73 /* SearchPhotoResponse.swift */,
 				56B3A334242F903700239B73 /* PhotosResponse.swift */,
-				56B3A338242F954C00239B73 /* Photo.swift */,
 				56B3A33A242FA21D00239B73 /* ErrorResponse.swift */,
 			);
 			path = Response;
@@ -231,7 +237,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56B3A33F2430DE0300239B73 /* UIViewController+Extension.swift in Sources */,
 				56B3A31B242F7C5500239B73 /* VirtualTourist.xcdatamodeld in Sources */,
+				56B3A33D2430C23300239B73 /* Constants.swift in Sources */,
 				56B3A315242F7C5500239B73 /* TravelLocationsMapViewController.swift in Sources */,
 				56B3A311242F7C5500239B73 /* AppDelegate.swift in Sources */,
 				56B3A339242F954C00239B73 /* Photo.swift in Sources */,
