@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
+class TravelLocationsMapViewController: UIViewController {
 
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
@@ -19,6 +19,18 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
         
         setupLongPressListenerOnMap()
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == Constants.Segue.showAlbumSegue) {
+            let vc = segue.destination as! PhotoAlbumViewController
+        }
+    }
+    
+    
+}
+
+extension TravelLocationsMapViewController: MKMapViewDelegate {
     
     // Setup Long Press Listener
     private func setupLongPressListenerOnMap() {
@@ -40,25 +52,6 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    
-    
-    private func buildPinTitle(placemark: CLPlacemark?) -> String {
-        guard let placemark = placemark else {
-            return "Unknown Location"
-        }
-        
-        let name = placemark.name == nil ? "" : "\(placemark.name!), "
-        let city = placemark.locality == nil ? "" : "\(placemark.locality!), "
-        let country = placemark.country ?? ""
-        let title = "\(name)\(city)\(country)"
-        
-        if title.isEmpty {
-            return "Unknown Location"
-        } else {
-            return title
-        }
-    }
-
     // Set Map Pins UI
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -86,13 +79,24 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == Constants.Segue.showAlbumSegue) {
-            let vc = segue.destination as! PhotoAlbumViewController
+    fileprivate func buildPinTitle(placemark: CLPlacemark?) -> String {
+        guard let placemark = placemark else {
+            return "Unknown Location"
+        }
+        
+        let name = placemark.name == nil ? "" : "\(placemark.name!), "
+        let city = placemark.locality == nil ? "" : "\(placemark.locality!), "
+        let country = placemark.country ?? ""
+        let title = "\(name)\(city)\(country)"
+        
+        if title.isEmpty {
+            return "Unknown Location"
+        } else {
+            return title
         }
     }
     
-    private func getLocationData(coordinates: CLLocationCoordinate2D, completion: @escaping (CLLocationCoordinate2D,CLPlacemark?, Error?) -> Void) {
+    fileprivate func getLocationData(coordinates: CLLocationCoordinate2D, completion: @escaping (CLLocationCoordinate2D,CLPlacemark?, Error?) -> Void) {
         let geocoder = CLGeocoder()
         
         activityIndicator?.startAnimating()
@@ -106,7 +110,7 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    private func addAnnotationPinToMap(coordinates: CLLocationCoordinate2D, placemark: CLPlacemark?, error: Error?) {
+    fileprivate func addAnnotationPinToMap(coordinates: CLLocationCoordinate2D, placemark: CLPlacemark?, error: Error?) {
         
         activityIndicator?.stopAnimating()
         
@@ -118,4 +122,3 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
         mapView.selectAnnotation(annotation, animated: true)
     }
 }
-
