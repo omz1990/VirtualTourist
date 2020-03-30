@@ -64,7 +64,7 @@ class FlickrClient {
         return task
     }
     
-    class func searchPhotos(lat: String, long: String, completion: @escaping ([Photo]?, Error?) -> Void) {
+    class func searchPhotos(lat: String, long: String, completion: @escaping ([PhotoResponse]?, Error?) -> Void) {
         let url = Endpoints.searchPhotos(lat: lat, long: long).url
         print("Search url: \(url)")
         makeGETRequest(url: url, responseType: SearchPhotoResponse.self) { (response, error) in

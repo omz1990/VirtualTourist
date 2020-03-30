@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Photo: Codable {
+struct PhotoResponse: Codable {
     let id: String
     let owner: String
     let secret: String
