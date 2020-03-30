@@ -14,13 +14,14 @@ class TravelLocationsMapViewController: UIViewController {
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
-    private let kMapRegion = "region"
+    private var selectedPinPlacemark: CLPlacemark!
+    private let mapRegion = "region"
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Try to load the saved region from UserDefaults
-        if let region = MKCoordinateRegion.load(fromDefaults: UserDefaults.standard, withKey: kMapRegion) {
+        if let region = MKCoordinateRegion.load(fromDefaults: UserDefaults.standard, withKey: mapRegion) {
           mapView.region = region
         }
     }
@@ -41,7 +42,7 @@ class TravelLocationsMapViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         // Save the map region when the view is about to disappear
-        mapView.region.write(toDefaults: UserDefaults.standard, withKey: kMapRegion)
+        mapView.region.write(toDefaults: UserDefaults.standard, withKey: mapRegion)
     }
     
 }
@@ -91,26 +92,7 @@ extension TravelLocationsMapViewController: MKMapViewDelegate {
     
     // Handle Map Pin tap
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
-            performSegue(withIdentifier: Constants.Segue.showAlbumSegue, sender: nil)
-        }
-    }
-    
-    fileprivate func buildPinTitle(placemark: CLPlacemark?) -> String {
-        guard let placemark = placemark else {
-            return "Unknown Location"
-        }
-        
-        let name = placemark.name == nil ? "" : "\(placemark.name!), "
-        let city = placemark.locality == nil ? "" : "\(placemark.locality!), "
-        let country = placemark.country ?? ""
-        let title = "\(name)\(city)\(country)"
-        
-        if title.isEmpty {
-            return "Unknown Location"
-        } else {
-            return title
-        }
+        performSegue(withIdentifier: Constants.Segue.showAlbumSegue, sender: nil)
     }
     
     fileprivate func getLocationData(coordinates: CLLocationCoordinate2D, completion: @escaping (CLLocationCoordinate2D,CLPlacemark?, Error?) -> Void) {
@@ -137,22 +119,5 @@ extension TravelLocationsMapViewController: MKMapViewDelegate {
         annotation.subtitle = "\(coordinates.latitude), \(coordinates.longitude)"
         mapView.addAnnotation(annotation)
         mapView.selectAnnotation(annotation, animated: true)
-    }
-}
-
-// MARK: Save Map region to UserDefaults Helpers
-extension MKCoordinateRegion {
-    
-    // Reference: https://stackoverflow.com/a/60367718/10510927
-    public func write(toDefaults defaults: UserDefaults, withKey key: String) {
-        let locationData = [center.latitude, center.longitude, span.latitudeDelta, span.longitudeDelta]
-        defaults.set(locationData, forKey: key)
-    }
-
-    public static func load(fromDefaults defaults:UserDefaults, withKey key:String) -> MKCoordinateRegion? {
-        guard let region = defaults.object(forKey: key) as? [Double] else { return nil }
-        let center = CLLocationCoordinate2D(latitude: region[0], longitude: region[1])
-        let span = MKCoordinateSpan(latitudeDelta: region[2], longitudeDelta: region[3])
-        return MKCoordinateRegion(center: center, span: span)
     }
 }

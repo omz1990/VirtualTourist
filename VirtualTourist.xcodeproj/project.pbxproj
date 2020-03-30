@@ -22,6 +22,7 @@
 		56B3A33B242FA21D00239B73 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A33A242FA21D00239B73 /* ErrorResponse.swift */; };
 		56B3A33D2430C23300239B73 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A33C2430C23300239B73 /* Constants.swift */; };
 		56B3A33F2430DE0300239B73 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A33E2430DE0300239B73 /* UIViewController+Extension.swift */; };
+		56EA0E8E2431E5C100831F80 /* MKCoordinateRegion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EA0E8D2431E5C100831F80 /* MKCoordinateRegion+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		56B3A33A242FA21D00239B73 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		56B3A33C2430C23300239B73 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		56B3A33E2430DE0300239B73 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		56EA0E8D2431E5C100831F80 /* MKCoordinateRegion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				56B3A32A242F7FD300239B73 /* Model */,
 				56B3A329242F7FCB00239B73 /* View */,
 				56B3A328242F7FBE00239B73 /* Controller */,
+				56EA0E8C2431E59C00831F80 /* Utilities */,
 				56B3A321242F7C5B00239B73 /* Info.plist */,
 			);
 			path = VirtualTourist;
@@ -166,6 +169,14 @@
 			path = Client;
 			sourceTree = "<group>";
 		};
+		56EA0E8C2431E59C00831F80 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				56EA0E8D2431E5C100831F80 /* MKCoordinateRegion+Extension.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -242,6 +253,7 @@
 				56B3A33D2430C23300239B73 /* Constants.swift in Sources */,
 				56B3A315242F7C5500239B73 /* TravelLocationsMapViewController.swift in Sources */,
 				56B3A311242F7C5500239B73 /* AppDelegate.swift in Sources */,
+				56EA0E8E2431E5C100831F80 /* MKCoordinateRegion+Extension.swift in Sources */,
 				56B3A339242F954C00239B73 /* PhotoResponse.swift in Sources */,
 				56B3A337242F908400239B73 /* SearchPhotoResponse.swift in Sources */,
 				56B3A33B242FA21D00239B73 /* ErrorResponse.swift in Sources */,
