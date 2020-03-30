@@ -24,14 +24,8 @@ class TravelLocationsMapViewController: UIViewController {
         
         if let pins = try? dataController.viewContext.fetch(fetchRequest) {
             pins.forEach { (pin) in
-                let placemark: CLPlacemark? = pin.placemark as! CLPlacemark?
-                if let coordinate = placemark?.location?.coordinate {
-                    let annotation = MKPointAnnotation()
-                    annotation.coordinate = coordinate
-                    annotation.title = pin.title ?? "Unknown Location"
-                    annotation.subtitle = "\(coordinate.latitude), \(coordinate.longitude)"
-                    mapView.addAnnotation(annotation)
-                }
+                let annotation = TravelLocationPinAnnotation(pin: pin)
+                mapView.addAnnotation(annotation)
             }
         }
     }
@@ -148,10 +142,7 @@ extension TravelLocationsMapViewController: MKMapViewDelegate {
         }
         
         // Update view with new Pin
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinates
-        annotation.title = title
-        annotation.subtitle = "\(coordinates.latitude), \(coordinates.longitude)"
+        let annotation = TravelLocationPinAnnotation(pin: pin)
         mapView.addAnnotation(annotation)
         mapView.selectAnnotation(annotation, animated: true)
         
