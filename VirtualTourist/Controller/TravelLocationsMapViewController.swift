@@ -14,12 +14,22 @@ class TravelLocationsMapViewController: UIViewController {
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
+    private let kMapRegion = "region"
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Try to load the saved region from UserDefaults
+        if let region = MKCoordinateRegion.load(fromDefaults: UserDefaults.standard, withKey: kMapRegion) {
+          mapView.region = region
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupLongPressListenerOnMap()
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == Constants.Segue.showAlbumSegue) {
@@ -27,6 +37,12 @@ class TravelLocationsMapViewController: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Save the map region when the view is about to disappear
+        mapView.region.write(toDefaults: UserDefaults.standard, withKey: kMapRegion)
+    }
     
 }
 
@@ -121,5 +137,22 @@ extension TravelLocationsMapViewController: MKMapViewDelegate {
         annotation.subtitle = "\(coordinates.latitude), \(coordinates.longitude)"
         mapView.addAnnotation(annotation)
         mapView.selectAnnotation(annotation, animated: true)
+    }
+}
+
+// MARK: Save Map region to UserDefaults Helpers
+extension MKCoordinateRegion {
+    
+    // Reference: https://stackoverflow.com/a/60367718/10510927
+    public func write(toDefaults defaults: UserDefaults, withKey key: String) {
+        let locationData = [center.latitude, center.longitude, span.latitudeDelta, span.longitudeDelta]
+        defaults.set(locationData, forKey: key)
+    }
+
+    public static func load(fromDefaults defaults:UserDefaults, withKey key:String) -> MKCoordinateRegion? {
+        guard let region = defaults.object(forKey: key) as? [Double] else { return nil }
+        let center = CLLocationCoordinate2D(latitude: region[0], longitude: region[1])
+        let span = MKCoordinateSpan(latitudeDelta: region[2], longitudeDelta: region[3])
+        return MKCoordinateRegion(center: center, span: span)
     }
 }
