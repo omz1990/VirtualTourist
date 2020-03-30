@@ -18,6 +18,7 @@ class PhotoAlbumViewController: UIViewController {
     @IBOutlet private weak var newCollectionButton: UIButton!
     @IBOutlet private weak var errorLabel: UILabel!
     
+    var dataController: DataController!
     var placemark: CLPlacemark!
 
     override func viewDidLoad() {

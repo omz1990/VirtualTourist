@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56541A522432146F0017EDF6 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56541A512432146F0017EDF6 /* DataController.swift */; };
 		56B3A311242F7C5500239B73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A310242F7C5500239B73 /* AppDelegate.swift */; };
 		56B3A313242F7C5500239B73 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A312242F7C5500239B73 /* SceneDelegate.swift */; };
 		56B3A315242F7C5500239B73 /* TravelLocationsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A314242F7C5500239B73 /* TravelLocationsMapViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		56541A512432146F0017EDF6 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		56B3A30D242F7C5500239B73 /* VirtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56B3A310242F7C5500239B73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56B3A312242F7C5500239B73 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				56B3A319242F7C5500239B73 /* VirtualTourist.xcdatamodeld */,
+				56541A512432146F0017EDF6 /* DataController.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				56B3A311242F7C5500239B73 /* AppDelegate.swift in Sources */,
 				56EA0E8E2431E5C100831F80 /* MKCoordinateRegion+Extension.swift in Sources */,
 				56B3A339242F954C00239B73 /* PhotoResponse.swift in Sources */,
+				56541A522432146F0017EDF6 /* DataController.swift in Sources */,
 				56B3A337242F908400239B73 /* SearchPhotoResponse.swift in Sources */,
 				56B3A33B242FA21D00239B73 /* ErrorResponse.swift in Sources */,
 				56B3A32F242F843900239B73 /* PhotoAlbumViewController.swift in Sources */,

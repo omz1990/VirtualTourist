@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class TravelLocationsMapViewController: UIViewController {
 
@@ -17,6 +18,26 @@ class TravelLocationsMapViewController: UIViewController {
     private var selectedPinPlacemark: CLPlacemark!
     private let mapRegion = "region"
     
+    
+    private func setupFetchedResultsController() {
+        let fetchRequest: NSFetchRequest<Pin> = Pin.fetchRequest()
+        
+        if let pins = try? dataController.viewContext.fetch(fetchRequest) {
+            pins.forEach { (pin) in
+                let placemark: CLPlacemark? = pin.placemark as! CLPlacemark?
+                if let coordinate = placemark?.location?.coordinate {
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = coordinate
+                    annotation.title = pin.title ?? "Unknown Location"
+                    annotation.subtitle = "\(coordinate.latitude), \(coordinate.longitude)"
+                    mapView.addAnnotation(annotation)
+                }
+            }
+        }
+    }
+    
+    var dataController: DataController!
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -24,6 +45,7 @@ class TravelLocationsMapViewController: UIViewController {
         if let region = MKCoordinateRegion.load(fromDefaults: UserDefaults.standard, withKey: mapRegion) {
           mapView.region = region
         }
+        setupFetchedResultsController()
     }
     
     override func viewDidLoad() {
@@ -35,6 +57,7 @@ class TravelLocationsMapViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == Constants.Segue.showAlbumSegue) {
             let vc = segue.destination as! PhotoAlbumViewController
+            vc.dataController = dataController
         }
     }
     
@@ -111,13 +134,27 @@ extension TravelLocationsMapViewController: MKMapViewDelegate {
     
     fileprivate func addAnnotationPinToMap(coordinates: CLLocationCoordinate2D, placemark: CLPlacemark?, error: Error?) {
         
-        activityIndicator?.stopAnimating()
+        // Build the title
+        let title = buildPinTitle(placemark: placemark)
         
+        // Save new Pin in local storage
+        let pin = Pin(context: dataController.viewContext)
+        pin.placemark = placemark
+        pin.title = title
+        do {
+            try dataController.viewContext.save()
+        } catch {
+            showAlert(title: "Error", message: error.localizedDescription)
+        }
+        
+        // Update view with new Pin
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinates
-        annotation.title = buildPinTitle(placemark: placemark)
+        annotation.title = title
         annotation.subtitle = "\(coordinates.latitude), \(coordinates.longitude)"
         mapView.addAnnotation(annotation)
         mapView.selectAnnotation(annotation, animated: true)
+        
+        activityIndicator?.stopAnimating()
     }
 }
