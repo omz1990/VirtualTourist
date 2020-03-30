@@ -15,7 +15,7 @@ class TravelLocationsMapViewController: UIViewController {
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
-    private var selectedPinPlacemark: CLPlacemark!
+    private var selectedPin: Pin!
     private let mapRegion = "region"
     
     
@@ -52,6 +52,7 @@ class TravelLocationsMapViewController: UIViewController {
         if (segue.identifier == Constants.Segue.showAlbumSegue) {
             let vc = segue.destination as! PhotoAlbumViewController
             vc.dataController = dataController
+            vc.pin = selectedPin
         }
     }
     
@@ -109,7 +110,11 @@ extension TravelLocationsMapViewController: MKMapViewDelegate {
     
     // Handle Map Pin tap
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        performSegue(withIdentifier: Constants.Segue.showAlbumSegue, sender: nil)
+
+        if let annotation = view.annotation as? TravelLocationPinAnnotation {
+            selectedPin = annotation.pin
+            performSegue(withIdentifier: Constants.Segue.showAlbumSegue, sender: nil)
+        }
     }
     
     fileprivate func getLocationData(coordinates: CLLocationCoordinate2D, completion: @escaping (CLLocationCoordinate2D,CLPlacemark?, Error?) -> Void) {

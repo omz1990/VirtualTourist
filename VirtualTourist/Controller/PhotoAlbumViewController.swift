@@ -19,7 +19,7 @@ class PhotoAlbumViewController: UIViewController {
     @IBOutlet private weak var errorLabel: UILabel!
     
     var dataController: DataController!
-    var placemark: CLPlacemark!
+    var pin: Pin!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,25 +28,39 @@ class PhotoAlbumViewController: UIViewController {
     }
     
     private func populateMapData() {
-        var annotations = [MKPointAnnotation]()
-        
-        let lat = CLLocationDegrees(placemark?.location?.coordinate.latitude ?? 0.0)
-        let long = CLLocationDegrees(placemark?.location?.coordinate.longitude ?? 0.0)
-        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = buildPinTitle(placemark: placemark)
-        annotation.subtitle = "\(coordinate.latitude), \(coordinate.longitude)"
-        annotations.append(annotation)
+        let annotation = TravelLocationPinAnnotation(pin: pin)
         
         self.mapView.addAnnotation(annotation)
         // Zoom into the selected location
-        self.mapView.showAnnotations(annotations, animated: true)
+        self.mapView.showAnnotations([annotation], animated: true)
         // Make sure the title is shown without having to tap the pin
         self.mapView.selectAnnotation(annotation, animated: true)
     }
 
+
     @IBAction func newCollectionButtonTap(_ sender: Any) {
+    }
+}
+
+extension PhotoAlbumViewController: MKMapViewDelegate {
+    
+    // Set Map Pins UI
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
     }
 }
