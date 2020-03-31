@@ -117,9 +117,21 @@ extension PhotoAlbumViewController: UICollectionViewDataSource, UICollectionView
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! PhotoAlbumCell
         if let url = cellPhoto.photoUrl {
-            FlickrClient.downloadPhoto(urlString: url) { (image, error) in
-                cell.image?.image = image
+            if let downloadedData = cellPhoto.image {
+                if let downloadedImage = UIImage(data: downloadedData) {
+                    cell.image?.image = downloadedImage
+                }
+            } else {
+                FlickrClient.downloadPhoto(urlString: url) { (image, error) in
+                    guard let image = image else {
+                        return
+                    }
+                    cellPhoto.image = image.jpegData(compressionQuality: 1.0)
+                    try? self.dataController.viewContext.save()
+                }
+                
             }
+            
         }
 
         return cell
@@ -163,6 +175,12 @@ extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
             
             blockOperation.addExecutionBlock {
                 self.collectionView?.insertItems(at: [newIndexPath])
+            }
+        case .update:
+            guard let indexPath = indexPath else { break }
+            
+            blockOperation.addExecutionBlock {
+                self.collectionView?.reloadItems(at: [indexPath])
             }
         case .delete:
             guard let indexPath = indexPath else { break }
