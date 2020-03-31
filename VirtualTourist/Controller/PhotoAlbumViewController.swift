@@ -52,19 +52,6 @@ class PhotoAlbumViewController: UIViewController {
         fetchedResultsController = nil
     }
     
-    private func setupFetchedResultsController() {
-        // Fetch photos for the current Pin
-        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
-        let predicate = NSPredicate(format: "pin == %@", pin)
-        fetchRequest.predicate = predicate
-        let sortDescriptor = NSSortDescriptor(key: "photoId", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "\(pin.objectID)")
-        fetchedResultsController.delegate = self
-        try? fetchedResultsController.performFetch()
-    }
-    
     // MARK: Fetch and Save Photos
     private func fetchPhotosFromApi() {
         activityIndicator?.startAnimating()
@@ -96,7 +83,6 @@ class PhotoAlbumViewController: UIViewController {
                 showAlert(title: "Error", message: error.localizedDescription)
             }
         }
-        
     }
 
     @IBAction func newCollectionButtonTap(_ sender: Any) {
@@ -129,12 +115,26 @@ extension PhotoAlbumViewController: UICollectionViewDataSource, UICollectionView
                     cellPhoto.image = image.jpegData(compressionQuality: 1.0)
                     try? self.dataController.viewContext.save()
                 }
-                
             }
-            
         }
-
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cellPhoto = fetchedResultsController.object(at: indexPath)
+        
+        let alert = UIAlertController(title: "Delete image", message: "Are you sure you want to delete the selected image?", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Delete", style: .default) { (action) in
+            self.dataController.viewContext.delete(cellPhoto)
+            try? self.dataController.viewContext.save()
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        present(alert, animated: true, completion: nil)
+
     }
     
     // MARK: Set collection view cell size helpers
@@ -163,6 +163,19 @@ extension PhotoAlbumViewController: UICollectionViewDataSource, UICollectionView
 
 // MARK: NSFetchedResultsControllerDelegate
 extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
+    
+    private func setupFetchedResultsController() {
+        // Fetch photos for the current Pin
+        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+        let predicate = NSPredicate(format: "pin == %@", pin)
+        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "photoId", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "\(pin.objectID)")
+        fetchedResultsController.delegate = self
+        try? fetchedResultsController.performFetch()
+    }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         blockOperation = BlockOperation()
