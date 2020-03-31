@@ -44,6 +44,8 @@ class PhotoAlbumViewController: UIViewController {
         // If we don't have any photos, fetch from the API
         if (pin.photos?.count ?? 0 == 0) {
             fetchPhotosFromApi()
+        } else {
+            newCollectionButton.isEnabled = true
         }
     }
     
@@ -55,6 +57,7 @@ class PhotoAlbumViewController: UIViewController {
     // MARK: Fetch and Save Photos
     private func fetchPhotosFromApi() {
         activityIndicator?.startAnimating()
+        newCollectionButton?.isEnabled = false
         errorLabel?.text = ""
         
         FlickrClient.searchPhotos(lat: "\(placemark?.location?.coordinate.latitude ?? 0.0)", long: "\(placemark?.location?.coordinate.longitude ?? 0.0)", completion: handleSearchApiResponse(photos:error:))
@@ -62,11 +65,17 @@ class PhotoAlbumViewController: UIViewController {
     
     private func handleSearchApiResponse(photos: [PhotoResponse]?, error: Error?) {
         activityIndicator?.stopAnimating()
+        newCollectionButton?.isEnabled = true
+        
         guard let photos = photos else {
             errorLabel?.text = "No images found"
             return
         }
-        savePhotos(photos: photos)
+        if photos.count == 0 {
+            errorLabel?.text = "No images found"
+        } else {
+            savePhotos(photos: photos)
+        }
     }
     
     private func savePhotos(photos: [PhotoResponse]) {
@@ -86,9 +95,22 @@ class PhotoAlbumViewController: UIViewController {
     }
 
     @IBAction func newCollectionButtonTap(_ sender: Any) {
-        // TODO
+        let alert = UIAlertController(title: "New collection", message: "Are you sure you want to delete this album and download a new one?", preferredStyle: .alert)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Ok", style: .default) { (action) in
+            self.newCollectionButton?.isEnabled = false
+            self.fetchedResultsController.fetchedObjects?.forEach({ (photo) in
+               self.dataController.viewContext.delete(photo)
+               try? self.dataController.viewContext.save()
+           })
+            self.fetchPhotosFromApi()
+        }
+
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        present(alert, animated: true, completion: nil)
     }
-    
 }
 
 // MARK: Extension to handle Collection View
