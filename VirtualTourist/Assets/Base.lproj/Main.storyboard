@@ -105,7 +105,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="186" height="170"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ic9-Gr-zN7">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="ic9-Gr-zN7">
                                                     <rect key="frame" x="2" y="1" width="182" height="168"/>
                                                 </imageView>
                                             </subviews>
@@ -183,4 +183,7 @@
             <point key="canvasLocation" x="1760.8695652173915" y="140.625"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="placeholderImage" width="512" height="512"/>
+    </resources>
 </document>
