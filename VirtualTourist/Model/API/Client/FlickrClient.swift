@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class FlickrClient {
     
@@ -16,7 +17,7 @@ class FlickrClient {
         static let apiKey = "api_key=ddf6cdae745e021ceec624f47792c27a"
         
         case searchPhotos(lat: String, long: String)
-        case getPhoto(farmId: String, serverId: String, photoId: String, photoSecret: String)
+        case getPhoto(farmId: Int, serverId: String, photoId: String, photoSecret: String)
         
         var stringValue: String {
             switch self {
@@ -74,5 +75,22 @@ class FlickrClient {
                 completion(nil, error)
             }
         }
+    }
+    
+    class func downloadPhoto(photo: PhotoResponse, completion: @escaping (UIImage?, Error?) -> Void) {
+        let url = Endpoints.getPhoto(farmId: photo.farm, serverId: photo.server, photoId: photo.id, photoSecret: photo.secret).url
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+            let image = UIImage(data: data)
+            DispatchQueue.main.async {
+                completion(image, error)
+            }
+        }
+        task.resume()
     }
 }
