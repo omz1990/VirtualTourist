@@ -77,8 +77,8 @@ class FlickrClient {
         }
     }
     
-    class func downloadPhoto(photo: PhotoResponse, completion: @escaping (UIImage?, Error?) -> Void) {
-        let url = Endpoints.getPhoto(farmId: photo.farm, serverId: photo.server, photoId: photo.id, photoSecret: photo.secret).url
+    class func downloadPhoto(urlString: String, completion: @escaping (UIImage?, Error?) -> Void) {
+        let url = URL(string: urlString)!
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 DispatchQueue.main.async {
